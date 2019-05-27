@@ -561,8 +561,8 @@ namespace Newtonsoft.Json.Serialization
                             return wrappedDictionary.UnderlyingDictionary;
                         }
 
-                            targetDictionary = dictionary;
-                        }
+                        targetDictionary = dictionary;
+                    }
                     else
                     {
                         targetDictionary = PopulateDictionary(dictionaryContract.ShouldCreateWrapper || !(existingValue is IDictionary) ? dictionaryContract.CreateWrapper(existingValue) : (IDictionary)existingValue, reader, dictionaryContract, member, id);
@@ -774,20 +774,70 @@ namespace Newtonsoft.Json.Serialization
                 ?? containerMember?.ItemTypeNameHandling
                 ?? Serializer._typeNameHandling;
 
-            if (resolvedTypeNameHandling != TypeNameHandling.None)
+            //find allowed types
+            HashSet<Type> memberAllowedTypes = null;
+            HashSet<Type> memberAllowedDerivedTypes = null;
+            if (resolvedTypeNameHandling == TypeNameHandling.None)
             {
                 StructMultiKey<string?, string> typeNameKey = ReflectionUtils.SplitFullyQualifiedTypeName(qualifiedTypeName);
-
-                Type specifiedType;
-                try
+                //safe type
+                if (objectType.IsDefined(typeof(JsonSafeTypeAttribute), true))
                 {
-                    specifiedType = Serializer._serializationBinder.BindToType(typeNameKey.Value1, typeNameKey.Value2);
-                }
-                catch (Exception ex)
-                {
-                    throw JsonSerializationException.Create(reader, "Error resolving type specified in JSON '{0}'.".FormatWith(CultureInfo.InvariantCulture, qualifiedTypeName), ex);
+                    //ensure sets
+                    memberAllowedTypes = memberAllowedTypes ?? new HashSet<Type>();
+                    memberAllowedDerivedTypes = memberAllowedDerivedTypes ?? new HashSet<Type>();
+                    //add
+                    memberAllowedTypes.Add(objectType);
+                    memberAllowedDerivedTypes.Add(objectType);
                 }
 
+                //process attributes
+                var attrs = member?.AttributeProvider?.GetAttributes(true).OfType<JsonAllowedTypeAttribute>();
+                if (attrs != null)
+                    foreach (var attr in attrs)
+                    {
+                        if (attr.AllowedType != null)
+                        {
+                            //ensure sets
+                            memberAllowedTypes = memberAllowedTypes ?? new HashSet<Type>();
+                            memberAllowedDerivedTypes = memberAllowedDerivedTypes ?? new HashSet<Type>();
+                            //add
+                            memberAllowedTypes.Add(attr.AllowedType);
+                            if (attr.AllowDerivedTypes)
+                                memberAllowedDerivedTypes.Add(attr.AllowedType);
+                        }
+                        if (attr.AllowedTypes != null)
+                        {
+                            //ensure sets
+                            memberAllowedTypes = memberAllowedTypes ?? new HashSet<Type>();
+                            memberAllowedDerivedTypes = memberAllowedDerivedTypes ?? new HashSet<Type>();
+                            //add
+                            foreach (var t in attr.AllowedTypes)
+                                memberAllowedTypes.Add(t);
+                            if (attr.AllowDerivedTypes)
+                                foreach (var t in attr.AllowedTypes)
+                                    memberAllowedDerivedTypes.Add(t);
+                        }
+                    }
+
+                if (memberAllowedTypes != null && memberAllowedTypes.Count == 0) memberAllowedTypes = null;
+                if (memberAllowedDerivedTypes != null && memberAllowedDerivedTypes.Count == 0) memberAllowedDerivedTypes = null;
+            }
+
+            //resolve type
+            Type specifiedType = null;
+            bool isSafeType = false;
+            try
+            {
+                var typeNameKey = ReflectionUtils.SplitFullyQualifiedTypeName(qualifiedTypeName);
+                specifiedType = Serializer._serializationBinder.BindToType(typeNameKey.Value1, typeNameKey.Value2);
+                if (specifiedType != null)
+                    isSafeType = specifiedType.IsDefined(typeof(JsonSafeTypeAttribute), true);
+            }
+            catch { }
+
+            if (resolvedTypeNameHandling != TypeNameHandling.None || Serializer.AllowedTypes != null || memberAllowedTypes != null || isSafeType)
+            {
                 if (specifiedType == null)
                 {
                     throw JsonSerializationException.Create(reader, "Type specified in JSON '{0}' was not resolved.".FormatWith(CultureInfo.InvariantCulture, qualifiedTypeName));
@@ -805,6 +855,32 @@ namespace Newtonsoft.Json.Serialization
                     && !objectType.IsAssignableFrom(specifiedType))
                 {
                     throw JsonSerializationException.Create(reader, "Type specified in JSON '{0}' is not compatible with '{1}'.".FormatWith(CultureInfo.InvariantCulture, specifiedType.AssemblyQualifiedName, objectType.AssemblyQualifiedName));
+                }
+
+                //object type filtering
+                if (memberAllowedTypes != null)
+                {
+                    if (!memberAllowedTypes.Contains(specifiedType))
+                    {
+                        //check for derived types
+                        bool allowed = false;
+                        if (memberAllowedDerivedTypes != null)
+                            foreach (var type in memberAllowedDerivedTypes)
+                            {
+                                if (type.IsAssignableFrom(specifiedType))
+                                {
+                                    allowed = true;
+                                    break;
+                                }
+                            }
+                        if (!allowed)
+                            throw JsonSerializationException.Create(reader, "Type specified in JSON '{0}' was not allowed. (Using member attributes)".FormatWith(CultureInfo.InvariantCulture, qualifiedTypeName));
+                    }
+                }
+                else if (Serializer.AllowedTypes != null)
+                {
+                    if (!Serializer.AllowedTypes.Contains(specifiedType))
+                        throw JsonSerializationException.Create(reader, "Type specified in JSON '{0}' was not allowed.".FormatWith(CultureInfo.InvariantCulture, qualifiedTypeName));
                 }
 
                 objectType = specifiedType;
@@ -1928,7 +2004,7 @@ namespace Newtonsoft.Json.Serialization
             public CreatorPropertyContext(string name)
             {
                 Name = name;
-            }
+        }
         }
 
         private object CreateObjectUsingCreatorWithParameters(JsonReader reader, JsonObjectContract contract, JsonProperty? containerProperty, ObjectConstructor<object> creator, string? id)
@@ -2086,15 +2162,15 @@ namespace Newtonsoft.Json.Serialization
                                 // Don't attempt to populate array/read-only list
                                 if (!createdObjectCollectionWrapper.IsFixedSize)
                                 {
-                                    IList newValues = (propertyArrayContract.ShouldCreateWrapper) ? propertyArrayContract.CreateWrapper(value) : (IList)value;
+                                IList newValues = (propertyArrayContract.ShouldCreateWrapper) ? propertyArrayContract.CreateWrapper(value) : (IList)value;
 
-                                    foreach (object newValue in newValues)
-                                    {
-                                        createdObjectCollectionWrapper.Add(newValue);
-                                    }
+                                foreach (object newValue in newValues)
+                                {
+                                    createdObjectCollectionWrapper.Add(newValue);
                                 }
                             }
                         }
+                    }
                     }
                     else if (propertyContract.ContractType == JsonContractType.Dictionary)
                     {
