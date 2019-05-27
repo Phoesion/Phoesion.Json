@@ -587,7 +587,9 @@ namespace Newtonsoft.Json.Serialization
             {
                 WriteReferenceIdProperty(writer, contract.UnderlyingType, value);
             }
-            if (ShouldWriteType(TypeNameHandling.Objects, contract, member, collectionContract, containerProperty))
+
+            if (ShouldWriteType(TypeNameHandling.Objects, contract, member, collectionContract, containerProperty) ||
+                (_serializeStack.Count == _rootLevel && Serializer.WriteRootObjectTypeName))
             {
                 WriteTypeProperty(writer, contract.UnderlyingType);
             }

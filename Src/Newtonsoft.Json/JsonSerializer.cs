@@ -79,6 +79,7 @@ namespace Newtonsoft.Json
         private bool _dateFormatStringSet;
 
         public ISet<Type> AllowedTypes;
+        internal bool WriteRootObjectTypeName;
 
         /// <summary>
         /// Occurs when the <see cref="JsonSerializer"/> errors during serialization and deserialization.
@@ -663,6 +664,7 @@ namespace Newtonsoft.Json
             }
 
             serializer.AllowedTypes = settings.AllowedTypes;
+            serializer.WriteRootObjectTypeName = settings.WriteRootObjectTypeName;
 
             // serializer specific
             if (settings._typeNameHandling != null)

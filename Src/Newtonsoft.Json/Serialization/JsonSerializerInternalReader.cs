@@ -781,7 +781,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 StructMultiKey<string?, string> typeNameKey = ReflectionUtils.SplitFullyQualifiedTypeName(qualifiedTypeName);
                 //safe type
-                if (objectType.IsDefined(typeof(JsonSafeTypeAttribute), true))
+                if (objectType!=null && objectType.IsDefined(typeof(JsonSafeTypeAttribute), true))
                 {
                     //ensure sets
                     memberAllowedTypes = memberAllowedTypes ?? new HashSet<Type>();
