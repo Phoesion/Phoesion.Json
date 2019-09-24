@@ -25,7 +25,7 @@
 
 using System;
 
-namespace Newtonsoft.Json.Utilities
+namespace Phoesion.Json.Utilities
 {
     internal readonly struct StringReference
     {

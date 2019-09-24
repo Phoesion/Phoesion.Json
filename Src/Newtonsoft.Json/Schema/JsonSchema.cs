@@ -26,23 +26,23 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Linq;
+using Phoesion.Json.Utilities;
 using System.Globalization;
 
 #nullable disable
 
-namespace Newtonsoft.Json.Schema
+namespace Phoesion.Json.Schema
 {
     /// <summary>
     /// <para>
     /// An in-memory representation of a JSON Schema.
     /// </para>
     /// <note type="caution">
-    /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+    /// JSON Schema validation has been moved to its own package. See <see href="https://www.Phoesion.com/jsonschema">https://www.Phoesion.com/jsonschema</see> for more details.
     /// </note>
     /// </summary>
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.Phoesion.com/jsonschema for more details.")]
     public class JsonSchema
     {
         /// <summary>

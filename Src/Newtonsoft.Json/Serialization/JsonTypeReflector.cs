@@ -32,15 +32,15 @@ using System.Security;
 #if HAVE_CAS
 using System.Security.Permissions;
 #endif
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 #if !HAVE_LINQ
-using Newtonsoft.Json.Utilities.LinqBridge;
+using Phoesion.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
 using System.Runtime.Serialization;
 
-namespace Newtonsoft.Json.Serialization
+namespace Phoesion.Json.Serialization
 {
     internal static class JsonTypeReflector
     {
@@ -58,7 +58,7 @@ namespace Newtonsoft.Json.Serialization
 
         public const string ConcurrentDictionaryTypeName = "System.Collections.Concurrent.ConcurrentDictionary`2";
 
-        private static readonly ThreadSafeStore<Type, Func<object[]?, object>> CreatorCache = 
+        private static readonly ThreadSafeStore<Type, Func<object[]?, object>> CreatorCache =
             new ThreadSafeStore<Type, Func<object[]?, object>>(GetCreator);
 
 #if !(NET20 || DOTNET)
@@ -66,7 +66,7 @@ namespace Newtonsoft.Json.Serialization
         private static ReflectionObject? _metadataTypeAttributeReflectionObject;
 #endif
 
-        public static T? GetCachedAttribute<T>(object attributeProvider) where T : Attribute
+        public static T GetCachedAttribute<T>(object attributeProvider) where T : Attribute
         {
             return CachedAttributeGetter<T>.GetAttribute(attributeProvider);
         }
@@ -308,9 +308,9 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
-        private static T? GetAttribute<T>(Type type) where T : Attribute
+        private static T GetAttribute<T>(Type type) where T : Attribute
         {
-            T? attribute;
+            T attribute;
 
 #if !(NET20 || DOTNET)
             Type? metadataType = GetAssociatedMetadataType(type);
@@ -342,9 +342,9 @@ namespace Newtonsoft.Json.Serialization
             return null;
         }
 
-        private static T? GetAttribute<T>(MemberInfo memberInfo) where T : Attribute
+        private static T GetAttribute<T>(MemberInfo memberInfo) where T : Attribute
         {
-            T? attribute;
+            T attribute;
 
 #if !(NET20 || DOTNET)
             Type? metadataType = GetAssociatedMetadataType(memberInfo.DeclaringType);
@@ -423,7 +423,7 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
-        public static T? GetAttribute<T>(object provider) where T : Attribute
+        public static T GetAttribute<T>(object provider) where T : Attribute
         {
             if (provider is Type type)
             {

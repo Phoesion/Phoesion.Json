@@ -25,7 +25,7 @@
 
 #nullable disable
 
-namespace Newtonsoft.Json.Bson
+namespace Phoesion.Json.Bson
 {
     internal enum BsonType : sbyte
     {

@@ -25,9 +25,9 @@
 
 using System;
 using System.Reflection;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 
-namespace Newtonsoft.Json.Converters
+namespace Phoesion.Json.Converters
 {
     /// <summary>
     /// Creates a custom object.

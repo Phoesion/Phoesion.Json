@@ -26,13 +26,13 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 
 #if !HAVE_LINQ
-using Newtonsoft.Json.Utilities.LinqBridge;
+using Phoesion.Json.Utilities.LinqBridge;
 #endif
 
-namespace Newtonsoft.Json.Serialization
+namespace Phoesion.Json.Serialization
 {
     /// <summary>
     /// Maps a JSON property to a .NET member or constructor parameter.

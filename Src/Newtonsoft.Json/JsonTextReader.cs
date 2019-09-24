@@ -31,9 +31,9 @@ using System.Diagnostics;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 
-namespace Newtonsoft.Json
+namespace Phoesion.Json
 {
     internal enum ReadType
     {

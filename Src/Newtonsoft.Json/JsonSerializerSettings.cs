@@ -28,11 +28,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.Serialization.Formatters;
-using Newtonsoft.Json.Serialization;
+using Phoesion.Json.Serialization;
 using System.Runtime.Serialization;
 using System.Diagnostics;
 
-namespace Newtonsoft.Json
+namespace Phoesion.Json
 {
     /// <summary>
     /// Specifies the settings on a <see cref="JsonSerializer"/> object.

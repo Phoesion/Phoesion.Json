@@ -24,10 +24,10 @@
 #endregion
 
 using System;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 using System.Globalization;
 
-namespace Newtonsoft.Json
+namespace Phoesion.Json
 {
     /// <summary>
     /// Instructs the <see cref="JsonSerializer"/> to use the specified <see cref="JsonConverter"/> when serializing the member or class.

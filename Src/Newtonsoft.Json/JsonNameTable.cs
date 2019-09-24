@@ -1,4 +1,4 @@
-﻿namespace Newtonsoft.Json
+﻿namespace Phoesion.Json
 {
     /// <summary>
     /// Base class for a table of atomized string objects.

@@ -27,11 +27,11 @@ using System;
 using System.Globalization;
 using System.ComponentModel;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Utilities;
-using Newtonsoft.Json.Serialization;
+using Phoesion.Json.Linq;
+using Phoesion.Json.Utilities;
+using Phoesion.Json.Serialization;
 #if !HAVE_LINQ
-using Newtonsoft.Json.Utilities.LinqBridge;
+using Phoesion.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 
@@ -39,17 +39,17 @@ using System.Linq;
 
 #nullable disable
 
-namespace Newtonsoft.Json.Schema
+namespace Phoesion.Json.Schema
 {
     /// <summary>
     /// <para>
     /// Generates a <see cref="JsonSchema"/> from a specified <see cref="Type"/>.
     /// </para>
     /// <note type="caution">
-    /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+    /// JSON Schema validation has been moved to its own package. See <see href="https://www.Phoesion.com/jsonschema">https://www.Phoesion.com/jsonschema</see> for more details.
     /// </note>
     /// </summary>
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.Phoesion.com/jsonschema for more details.")]
     public class JsonSchemaGenerator
     {
         /// <summary>

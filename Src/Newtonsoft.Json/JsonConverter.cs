@@ -24,12 +24,12 @@
 #endregion
 
 using System;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Newtonsoft.Json
+namespace Phoesion.Json
 {
     /// <summary>
     /// Converts an object to and from JSON.

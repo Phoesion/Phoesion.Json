@@ -24,21 +24,21 @@
 #endregion
 
 using System;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 
 #nullable disable
 
-namespace Newtonsoft.Json.Schema
+namespace Phoesion.Json.Schema
 {
     /// <summary>
     /// <para>
     /// Returns detailed information related to the <see cref="ValidationEventHandler"/>.
     /// </para>
     /// <note type="caution">
-    /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+    /// JSON Schema validation has been moved to its own package. See <see href="https://www.Phoesion.com/jsonschema">https://www.Phoesion.com/jsonschema</see> for more details.
     /// </note>
     /// </summary>
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.Phoesion.com/jsonschema for more details.")]
     public class ValidationEventArgs : EventArgs
     {
         private readonly JsonSchemaException _ex;

@@ -30,9 +30,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 
-namespace Newtonsoft.Json.Linq
+namespace Phoesion.Json.Linq
 {
     public abstract partial class JContainer
     {

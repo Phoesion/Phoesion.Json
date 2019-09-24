@@ -31,9 +31,9 @@ using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 
-namespace Newtonsoft.Json.Converters
+namespace Phoesion.Json.Converters
 {
     /// <summary>
     /// Converts an <see cref="ExpandoObject"/> to and from JSON.

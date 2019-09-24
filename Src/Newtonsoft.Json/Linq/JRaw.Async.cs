@@ -30,7 +30,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Newtonsoft.Json.Linq
+namespace Phoesion.Json.Linq
 {
     public partial class JRaw
     {

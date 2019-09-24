@@ -26,7 +26,7 @@
 using System;
 using System.Collections.Generic;
 #if !HAVE_LINQ
-using Newtonsoft.Json.Utilities.LinqBridge;
+using Phoesion.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 
@@ -34,9 +34,9 @@ using System.Linq;
 
 #nullable disable
 
-namespace Newtonsoft.Json.Schema
+namespace Phoesion.Json.Schema
 {
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.Phoesion.com/jsonschema for more details.")]
     internal class JsonSchemaModelBuilder
     {
         private JsonSchemaNodeCollection _nodes = new JsonSchemaNodeCollection();

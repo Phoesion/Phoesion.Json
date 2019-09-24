@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Globalization;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 
-namespace Newtonsoft.Json.Linq.JsonPath
+namespace Phoesion.Json.Linq.JsonPath
 {
     internal class ArrayIndexFilter : PathFilter
     {

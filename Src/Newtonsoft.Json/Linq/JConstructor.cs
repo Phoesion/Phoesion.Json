@@ -26,10 +26,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 using System.Globalization;
 
-namespace Newtonsoft.Json.Linq
+namespace Phoesion.Json.Linq
 {
     /// <summary>
     /// Represents a JSON constructor.

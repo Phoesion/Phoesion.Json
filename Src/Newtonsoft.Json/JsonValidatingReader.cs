@@ -28,14 +28,14 @@ using System.Collections.Generic;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Linq;
+using Phoesion.Json.Schema;
+using Phoesion.Json.Utilities;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.IO;
 #if !HAVE_LINQ
-using Newtonsoft.Json.Utilities.LinqBridge;
+using Phoesion.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 
@@ -43,17 +43,17 @@ using System.Linq;
 
 #nullable disable
 
-namespace Newtonsoft.Json
+namespace Phoesion.Json
 {
     /// <summary>
     /// <para>
     /// Represents a reader that provides <see cref="JsonSchema"/> validation.
     /// </para>
     /// <note type="caution">
-    /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+    /// JSON Schema validation has been moved to its own package. See <see href="https://www.Phoesion.com/jsonschema">https://www.Phoesion.com/jsonschema</see> for more details.
     /// </note>
     /// </summary>
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.Phoesion.com/jsonschema for more details.")]
     public class JsonValidatingReader : JsonReader, IJsonLineInfo
     {
         private class SchemaScope

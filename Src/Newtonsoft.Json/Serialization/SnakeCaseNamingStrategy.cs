@@ -23,9 +23,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 
-namespace Newtonsoft.Json.Serialization
+namespace Phoesion.Json.Serialization
 {
     /// <summary>
     /// A snake case naming strategy.

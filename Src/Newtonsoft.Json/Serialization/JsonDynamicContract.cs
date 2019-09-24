@@ -27,9 +27,9 @@
 using System;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 
-namespace Newtonsoft.Json.Serialization
+namespace Phoesion.Json.Serialization
 {
     /// <summary>
     /// Contract details for a <see cref="Type"/> used by the <see cref="JsonSerializer"/>.

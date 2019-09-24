@@ -35,13 +35,13 @@ using System.Text;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
 #if !HAVE_LINQ
-using Newtonsoft.Json.Utilities.LinqBridge;
+using Phoesion.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using Newtonsoft.Json.Serialization;
+using Phoesion.Json.Serialization;
 
-namespace Newtonsoft.Json.Utilities
+namespace Phoesion.Json.Utilities
 {
 #if (DOTNET || PORTABLE || PORTABLE40) && !NETSTANDARD2_0
     [Flags]
@@ -725,12 +725,12 @@ namespace Newtonsoft.Json.Utilities
             return true;
         }
 
-        public static T? GetAttribute<T>(object attributeProvider) where T : Attribute
+        public static T GetAttribute<T>(object attributeProvider) where T : Attribute
         {
             return GetAttribute<T>(attributeProvider, true);
         }
 
-        public static T? GetAttribute<T>(object attributeProvider, bool inherit) where T : Attribute
+        public static T GetAttribute<T>(object attributeProvider, bool inherit) where T : Attribute
         {
             T[] attributes = GetAttributes<T>(attributeProvider, inherit);
 

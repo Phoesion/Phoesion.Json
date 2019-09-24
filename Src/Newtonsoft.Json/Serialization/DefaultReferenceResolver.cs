@@ -24,10 +24,10 @@
 #endregion
 
 using System;
-using Newtonsoft.Json.Utilities;
+using Phoesion.Json.Utilities;
 using System.Globalization;
 
-namespace Newtonsoft.Json.Serialization
+namespace Phoesion.Json.Serialization
 {
     internal class DefaultReferenceResolver : IReferenceResolver
     {

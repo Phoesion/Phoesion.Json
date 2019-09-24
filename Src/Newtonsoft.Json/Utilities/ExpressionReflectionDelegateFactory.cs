@@ -31,9 +31,9 @@ using System.Text;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using Newtonsoft.Json.Serialization;
+using Phoesion.Json.Serialization;
 
-namespace Newtonsoft.Json.Utilities
+namespace Phoesion.Json.Utilities
 {
     internal class ExpressionReflectionDelegateFactory : ReflectionDelegateFactory
     {

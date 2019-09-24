@@ -30,7 +30,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Newtonsoft.Json.Utilities
+namespace Phoesion.Json.Utilities
 {
     internal sealed class DynamicProxyMetaObject<T> : DynamicMetaObject
     {
